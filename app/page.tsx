@@ -1,12 +1,15 @@
-import { Button } from "@/components/ui/button";
+import { Fragment, Suspense } from "react";
+import Hero from "@/components/home/Hero";
+import FeaturedProducts from "@/components/home/FeaturedProducts";
+import LoadingContainer from "@/components/global/LoadingContainer";
 
 export default function HomePage() {
   return (
-    <div>
-      <h1 className="text-3xl text-muted-foreground">HomePage</h1>
-      <Button variant="outline" size="lg" className="capitalize m-8">
-        click me
-      </Button>
-    </div>
+    <Fragment>
+      <Hero />
+      <Suspense fallback={<LoadingContainer />}>
+        <FeaturedProducts />
+      </Suspense>
+    </Fragment>
   );
 }
