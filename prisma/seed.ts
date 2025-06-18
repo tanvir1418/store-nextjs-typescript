@@ -1,6 +1,8 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { PrismaClient } = require("../lib/generated/prisma");
-const products = [
+import { Prisma, PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+const products: Prisma.ProductCreateInput[] = [
   {
     name: "avant-garde lamp",
     company: "Modenza",
@@ -47,21 +49,10 @@ const products = [
   },
 ];
 
-const prisma = new PrismaClient();
-
-// async function main() {
-//   for (const product of products) {
-//     await prisma.product.create({
-//       data: product,
-//     });
-//   }
-// }
-
-async function main() {
-  await prisma.product.createMany({
-    data: products,
-    skipDuplicates: true, // optional
-  });
+export async function main() {
+  for (const product of products) {
+    await prisma.product.create({ data: product });
+  }
 }
 
 main()
