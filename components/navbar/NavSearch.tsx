@@ -22,11 +22,16 @@ export default function NavSearch() {
 
   // Sync searchParams URL to Input Field
   // If it gets removed (e.g., the user cleared it), it also clears the input field.
+  // useEffect(() => {
+  //   if (!searchParams.get("search")) {
+  //     setSearch("");
+  //   }
+  // }, [searchParams.get("search")]);
+
   useEffect(() => {
-    if (!searchParams.get("search")) {
-      setSearch("");
-    }
-  }, [searchParams.get("search")]);
+    const searchValue = searchParams.get("search") || "";
+    setSearch(searchValue);
+  }, [searchParams]);
 
   return (
     <Input
