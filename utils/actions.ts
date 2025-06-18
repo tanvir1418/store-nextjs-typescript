@@ -26,26 +26,6 @@ export const fetchAllProducts = async ({ search = "" }: { search: string }) => {
   return products;
 };
 
-// export const fetchAllProducts = async ({ search = "" }: { search: string }) => {
-//   const whereClause: Prisma.ProductWhereInput = search
-//     ? {
-//         OR: [
-//           { name: { contains: search, mode: "insensitive" } },
-//           { company: { contains: search, mode: "insensitive" } },
-//         ],
-//       }
-//     : {};
-
-//   const products = await db.product.findMany({
-//     where: whereClause,
-//     orderBy: {
-//       createdAt: "desc",
-//     },
-//   });
-
-//   return products;
-// };
-
 export const fetchSingleProduct = async (productId: string) => {
   const product = await db.product.findUnique({
     where: {
