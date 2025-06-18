@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation";
-import db from "./db";
+// import db from "./db";
 // import { Prisma } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 export const fetchFeaturedProducts = async () => {
-  const products = await db.product.findMany({
+  const products = await prisma.product.findMany({
     where: {
       featured: true,
     },
@@ -12,7 +13,7 @@ export const fetchFeaturedProducts = async () => {
 };
 
 export const fetchAllProducts = async ({ search = "" }: { search: string }) => {
-  const products = await db.product.findMany({
+  const products = await prisma.product.findMany({
     where: {
       OR: [
         { name: { contains: search, mode: "insensitive" } },
@@ -27,7 +28,7 @@ export const fetchAllProducts = async ({ search = "" }: { search: string }) => {
 };
 
 export const fetchSingleProduct = async (productId: string) => {
-  const product = await db.product.findUnique({
+  const product = await prisma.product.findUnique({
     where: {
       id: productId,
     },
